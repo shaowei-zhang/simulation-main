@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.topo.mapper.EnergyTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.topo.domain.EnergyType">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="typeCode" column="type_code" jdbcType="VARCHAR"/>
+            <result property="typeNameZh" column="type_name_zh" jdbcType="VARCHAR"/>
+            <result property="typeNameEn" column="type_name_en" jdbcType="VARCHAR"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="sortOrder" column="sort_order" jdbcType="INTEGER"/>
+            <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,type_code,type_name_zh,
+        type_name_en,icon,sort_order,
+        enabled,created_at,updated_at
+    </sql>
+</mapper>

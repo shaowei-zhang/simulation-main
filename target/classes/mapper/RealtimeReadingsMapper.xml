@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.topo.mapper.RealtimeReadingsMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.topo.domain.RealtimeReadings">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="collectedAt" column="collected_at" jdbcType="TIMESTAMP"/>
+            <result property="deviceCode" column="device_code" jdbcType="VARCHAR"/>
+            <result property="metricName" column="metric_name" jdbcType="VARCHAR"/>
+            <result property="source" column="source" jdbcType="VARCHAR"/>
+            <result property="unit" column="unit" jdbcType="VARCHAR"/>
+            <result property="value" column="value" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,collected_at,device_code,
+        metric_name,source,unit,
+        value
+    </sql>
+</mapper>
