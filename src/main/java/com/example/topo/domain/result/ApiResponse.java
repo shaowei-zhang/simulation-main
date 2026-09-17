@@ -1,4 +1,4 @@
-package com.example.topo.domain;
+package com.example.topo.domain.result;
 
 
 import lombok.AllArgsConstructor;
