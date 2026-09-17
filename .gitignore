@@ -1,0 +1,31 @@
+# ===== Java 构建输出 =====
+target/
+build/
+out/
+*.class
+*.log
+
+# ===== IDE 配置 =====
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+
+# ===== 忽略特定配置文件 =====
+# 忽略所有本地配置文件
+#src/main/resources/application-local.properties
+#src/main/resources/application-local.yml
+#src/main/resources/application-dev.yml
+#src/main/resources/application-prod.yml
+
+# 忽略任意目录下的 application-*.yml（但保留 application.yml）
+#**/application-*.yml
+#!**/application.yml
+
+# 忽略敏感配置
+#**/secret.properties
+#**/db.properties
