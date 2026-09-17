@@ -76,11 +76,11 @@ public class TopologyController {
      */
     @GetMapping("/topology/algorithms/{topologyId}")
     public ApiResponse<?> getTopologyAlgorithms(@PathVariable Long topologyId) {
-        return wrapServiceResult(topologyAlgorithmServiceImpl.getAlgorithmsForTopology(topologyId));
+        return ApiResponse.success(topologyAlgorithmServiceImpl.getAlgorithmsForTopology(topologyId));
     }
 
     /**
-     * 获取当前拓扑对应的实时数据快照（用于大屏/实时展示）
+     * 展示默认画布，刚一加载进来显示的topo（默认topo）
      */
     @GetMapping("/topology/realtime")
     public ApiResponse<?> getRealtimeSnapshot(@RequestParam(required = false) String campus) {
@@ -108,7 +108,7 @@ public class TopologyController {
      */
     @PostMapping("/modules/save")
     public ApiResponse<?> savePackagedTopology(@RequestBody Map<String, Object> payload) {
-        return wrapServiceResult(topologyService.savePackagedTopology(payload));
+        return ApiResponse.success(topologyService.savePackagedTopology(payload));
     }
 
     /**
@@ -116,7 +116,7 @@ public class TopologyController {
      */
     @DeleteMapping("/modules/delete/{name}")
     public ApiResponse<?> deletePackagedTopology(@PathVariable String name) {
-        return wrapServiceResult(topologyService.deletePackagedTopology(name));
+        return ApiResponse.success(topologyService.deletePackagedTopology(name));
     }
 
     /**
@@ -124,7 +124,7 @@ public class TopologyController {
      */
     @GetMapping("/components/{kind}")
     public ApiResponse<?> getComponentByKind(@PathVariable String kind) {
-        return wrapServiceResult(topologyService.getComponentByKind(kind));
+        return ApiResponse.success(topologyService.getComponentByKind(kind));
     }
 
     /**
@@ -132,7 +132,7 @@ public class TopologyController {
      */
     @PostMapping("/topology/save")
     public ApiResponse<?> saveCurrentDiagram(@RequestBody Map<String, Object> payload) {
-        return wrapServiceResult(topologyService.saveTopologyDocument(payload));
+        return ApiResponse.success(topologyService.saveTopologyDocument(payload));
     }
 
 //    /** 查询拓扑文档的历史版本记录，可按名称或校区过滤 */
@@ -151,7 +151,7 @@ public class TopologyController {
     public ApiResponse<?> renameTopologyDocument(@RequestBody Map<String, String> payload) {
         String oldName = payload == null ? "" : payload.getOrDefault("oldName", "");
         String newName = payload == null ? "" : payload.getOrDefault("newName", "");
-        return wrapServiceResult(topologyService.renameTopologyDocument(oldName, newName));
+        return ApiResponse.success(topologyService.renameTopologyDocument(oldName, newName));
     }
 
     /**
@@ -159,7 +159,7 @@ public class TopologyController {
      */
     @DeleteMapping("/topology/delete/{name}")
     public ApiResponse<?> deleteTopologyDocument(@PathVariable String name) {
-        return wrapServiceResult(topologyService.deleteTopologyDocument(name));
+        return ApiResponse.success(topologyService.deleteTopologyDocument(name));
     }
 
 //    /** 获取最近 20 条实时测量读数 */
@@ -194,23 +194,23 @@ public class TopologyController {
      * - status=error / not_found → 转为 ApiResponse.error(101, message)
      * - 其他 → 移除 status 字段，包装为 ApiResponse.success(data)
      */
-    private ApiResponse<?> wrapServiceResult(Map<String, Object> result) {
-        String status = result == null ? null : String.valueOf(result.get("status"));
-        if ("error".equals(status) || "not_found".equals(status)) {
-            String code = result.get("code") == null
-                    ? ("not_found".equals(status) ? "NOT_FOUND" : "BUSINESS_ERROR")
-                    : String.valueOf(result.get("code"));
-            String message = result.get("message") == null
-                    ? "请求处理失败"
-                    : String.valueOf(result.get("message"));
-            return ApiResponse.error(101, message);
-        }
-
-        Map<String, Object> data = new java.util.LinkedHashMap<>();
-        if (result != null) {
-            data.putAll(result);
-            data.remove("status");
-        }
-        return ApiResponse.success(data);
-    }
+//    private ApiResponse<?> wrapServiceResult(Map<String, Object> result) {
+//        String status = result == null ? null : String.valueOf(result.get("status"));
+//        if ("error".equals(status) || "not_found".equals(status)) {
+//            String code = result.get("code") == null
+//                    ? ("not_found".equals(status) ? "NOT_FOUND" : "BUSINESS_ERROR")
+//                    : String.valueOf(result.get("code"));
+//            String message = result.get("message") == null
+//                    ? "请求处理失败"
+//                    : String.valueOf(result.get("message"));
+//            return ApiResponse.error(101, message);
+//        }
+//
+//        Map<String, Object> data = new java.util.LinkedHashMap<>();
+//        if (result != null) {
+//            data.putAll(result);
+//            data.remove("status");
+//        }
+//        return ApiResponse.success(data);
+//    }
 }
